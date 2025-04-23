@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="assets/img/favicon.png" type="image/png">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+        <title>Responsive Website Travel</title>
+        <style>
+        .discover {
+            padding: 4rem 0;
+        }
+
+        .discover__container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .discover__card {
+            transition: transform 0.3s ease, z-index 0.3s;
+            transform: scale(0.8);
+            opacity: 0.7;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .swiper-slide-active {
+            transform: scale(1.1);
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .swiper-slide-prev,
+        .swiper-slide-next {
+            transform: scale(0.9);
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        .discover__img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+
+        .swiper-slide-active .discover__img {
+            height: 300px;
+        }
+
+        .discover__data {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .discover__title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .discover__description {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        
+                    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1000; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgba(0, 0, 0, 0.6); 
+        }
+
+        .modal-content {
+        background-color: #fff;
+        margin: 5% auto;
+        padding: 20px;
+        width: 90%;
+        max-width: 800px;
+        border-radius: 10px;
+        position: relative;
+        }
+
+        .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        }
+
+        </style>
+    </head>
+    <body>
+        <header class="header" id="header">
+            <nav class="nav container">
+                <a href="#" class="nav__logo" style="color: rgb(0, 21, 255);">Tomalistis</a>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link active-link"  style="color: rgb(50, 50, 209);">Home</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#about" class="nav__link"  style="color: rgb(50, 50, 209);">About</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#discover" class="nav__link"  style="color: rgb(50, 50, 209);">Discover</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#place" class="nav__link"  style="color: rgb(50, 50, 209);">Places</a>
+                        </li>
+                    </ul>
+
+                    <div class="nav__dark">
+                        <!-- Theme change button -->
+                        <span class="change-theme-name">Dark mode</span>
+                        <i class="ri-moon-line change-theme" id="theme-button"></i>
+                    </div>
+
+                    <i class="ri-close-line nav__close" id="nav-close"></i>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-function-line"></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="main">
+            <!--==================== HOME ====================-->
+            <section class="home" id="home">
+                <video class="home__img" autoplay muted loop playsinline style="object-fit: cover;" playbackRate="0.5">
+                    <source src="assets/video/home1_video.mp4" type="video/mp4" style="filter: blur(500px)">
+                    Your browser does not support the video tag.
+                </video>
+                
+
+                <div class="home__container container grid">
+                    <div class="home__data" style="margin-bottom: 130px;">
+                        <p style="margin: 0%;" class="home__data-title"><b>T</b>omalistis <b>F</b>alls</p>
+                        <h1 class="home__data-subtitle" >One of the cleanest inland bodies of water in the Philippines</h1>
+                    </div>
+                    <!-- LEFT SIDE: Explore + Social Links -->
+                    <div class="home__social">
+                        <a href="#" style="font-size: 25px; padding: 5px; border-radius: 7px; display: inline-block;">
+                           <strong style="color: #ffffff;">Explore More</strong></a>
+                        <a href="https://www.facebook.com/tomalistisfallscaibiran/" target="_blank" class="home__social-link" style="margin-right: 0%;">
+                            <i class="ri-facebook-box-fill" style="font-size: 24px;"></i>
+                        </a>
+                        <a href="https://youtu.be/CAiyNhRzwBM?si=XOcF5b1pFjPNXL-P" target="_blank" class="home__social-link">
+                            <i class="ri-youtube-fill" style="font-size: 24px;"></i>
+                        </a>
+                    </div>
+                    <div id="mapModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3909.2931414856866!2d124.6182445!3d11.5308168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3308220cd8ada619%3A0x7f5dc2c5ecbadba3!2sTomalistis%20Falls!5e0!3m2!1sen!2sph!4v1745328477331!5m2!1sen!2sph" 
+                                width="100%" 
+                                height="450" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="home__info" style="padding: 10px; border-radius: 20px; background:transparent; margin-bottom: 70px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">                
+                    <!-- RIGHT SIDE: Map Button -->
+                    <div class="home__info-overlay">
+                        <button class="button button--flex button--link home__info-button" id="openMapModal"
+                            style="background-color: transparent; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                            
+                            <img src="assets/img/map.png" alt="Map Icon" class="home__info-img"
+                                style="width: 80px; height: 80px; border-radius: 10px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+                            
+                            <h3 style="color: #fff; text-align: center; font-size: 16px; margin: 0;">View Map</h3>
+                            
+                            <i class="ri-map-pin-line" style="color: #fff; font-size: 20px; text-align: center;"></i>
+                        </button>
+                    </div>
+                </div>
+                
+            </section>
+
+            <!--==================== ABOUT ====================-->
+            <section class="about section" id="about">
+                <div class="about__container container grid">
+                    <div class="about__data">
+                        <h2 class="section__title about__title">More Information <br> About Tomalistis Falls</h2>
+                        <p class="about__description" style="text-align: justify;">
+                            Tomalistis Falls is a hidden gem located in Brgy. Tomalistis, Caibiran, Biliran. Tucked within lush greenery and a serene forest setting, the falls cascade gracefully down natural limestone rocks into a clear, cool basin — a refreshing sight and experience for nature lovers and adventurers alike.
+
+                            What makes Tomalistis Falls truly unique is its reputation for having one of the cleanest natural spring waters in the Philippines. In fact, the Department of Environment and Natural Resources (DENR) once recognized its water as among the cleanest inland bodies of water in the country.
+                        </p>
+                        <a href="#" class="button">Reserve a place</a>
+                    </div>
+
+                    <div class="about__img">
+                        <div class="about__img-overlay">
+                            <img src="assets/img/t4.jpg" alt="" class="about__img-one">
+                        </div>
+
+                        <div class="about__img-overlay">
+                            <img src="assets/img/t5.jpg" alt="" class="about__img-two">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!--==================== DISCOVER ====================-->
+            <section class="discover section" id="discover">
+            <h2 class="section__title">Discover the attractive<br> places in Tomalistis Falls</h2>
+
+            <div class="discover__container container swiper-container">
+                <div class="swiper-wrapper">
+                <!-- DISCOVER SLIDES -->
+                <div class="discover__card swiper-slide">
+                    <img src="assets/img/t1.jpg" alt="Bali" class="discover__img">
+                    <div class="discover__data">
+                    </div>
+                </div>
+
+                <div class="discover__card swiper-slide">
+                    <img src="assets/img/t2.jpg" alt="Hawaii" class="discover__img">
+                    <div class="discover__data">
+                    </div>
+                </div>
+
+                <div class="discover__card swiper-slide">
+                    <img src="assets/img/t3.jpg" alt="Hvar" class="discover__img">
+                    <div class="discover__data">
+                    </div>
+                </div>
+
+                <div class="discover__card swiper-slide">
+                    <img src="assets/img/t9.jpg" alt="Whitehaven" class="discover__img">
+                    <div class="discover__data">
+                    </div>
+                </div>
+
+                <div class="discover__card swiper-slide">
+                    <img src="assets/img/t10.jpg" alt="Maldives" class="discover__img">
+                    <div class="discover__data">
+                    </div>
+                </div>
+
+                <div class="discover__card swiper-slide">
+                    <img src="assets/img/t6.jpg" alt="Santorini" class="discover__img">
+                    <div class="discover__data">
+                    </div>
+                </div>
+
+                <div class="discover__card swiper-slide">
+                    <img src="assets/img/t7.jpg" alt="Amalfi Coast" class="discover__img">
+                    <div class="discover__data">
+                    </div>
+                </div>
+
+                <div class="discover__card swiper-slide">
+                    <img src="assets/img/t8.jpg" alt="Phuket" class="discover__img">
+                    <div class="discover__data">
+                    </div>
+                </div>
+                </div>
+            </div>
+            </section>
+            <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+            <!--==================== VIDEO ====================-->
+            <section class="video section">
+                <h2 class="section__title">Video Tour</h2>
+
+                <div class="video__container container">
+                    <p class="video__description">Find out more with our video of the most beautiful and 
+                        pleasant places for you and your family.
+                    </p>
+
+                    <div class="video__content">
+                        <div>
+                            <video id="video-file" autoplay loop muted width="100%" height="auto">
+                                <source src="assets/video/video1.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!--==================== PLACES ====================-->
+            <section class="place section" id="place">
+                <h2 class="section__title">Choose Your Place</h2>
+
+                <div class="place__container container grid">
+                    <!--==================== PLACES CARD 1 ====================-->
+                    <div class="place__card">
+                        <img src="assets/img/t1.jpg" alt="" class="place__img">
+                        
+                        <div class="place__content">
+                            <span class="place__rating">
+                                <i class="ri-star-line place__rating-icon"></i>
+                                <span class="place__rating-number">4,8</span>
+                            </span>
+
+                            <div class="place__data">
+                            </div>
+                        </div>
+
+                        <button class="button button--flex place__button">
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+
+                    <!--==================== PLACES CARD 2 ====================-->
+                    <div class="place__card">
+                        <img src="assets/img/t2.jpg" alt="" class="place__img">
+                        
+                        <div class="place__content">
+                            <span class="place__rating">
+                                <i class="ri-star-line place__rating-icon"></i>
+                                <span class="place__rating-number">5,0</span>
+                            </span>
+
+                            <div class="place__data">
+                            </div>
+                        </div>
+
+                        <button class="button button--flex place__button">
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+
+                    <!--==================== PLACES CARD 3 ====================-->
+                    <div class="place__card">
+                        <img src="assets/img/t3.jpg" alt="" class="place__img">
+                        
+                        <div class="place__content">
+                            <span class="place__rating">
+                                <i class="ri-star-line place__rating-icon"></i>
+                                <span class="place__rating-number">4,9</span>
+                            </span>
+
+                            <div class="place__data">
+                            </div>
+                        </div>
+
+                        <button class="button button--flex place__button">
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+
+                    <!--==================== PLACES CARD 4 ====================-->
+                    <div class="place__card">
+                        <img src="assets/img/t6.jpg" alt="" class="place__img">
+                        
+                        <div class="place__content">
+                            <span class="place__rating">
+                                <i class="ri-star-line place__rating-icon"></i>
+                                <span class="place__rating-number">4,8</span>
+                            </span>
+
+                            <div class="place__data">
+                            </div>
+                        </div>
+
+                        <button class="button button--flex place__button">
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+
+                    <!--==================== PLACES CARD 5 ====================-->
+                    <div class="place__card">
+                        <img src="assets/img/t8.jpg" alt="" class="place__img">
+                        
+                        <div class="place__content">
+                            <span class="place__rating">
+                                <i class="ri-star-line place__rating-icon"></i>
+                                <span class="place__rating-number">4,8</span>
+                            </span>
+
+                            <div class="place__data">
+                            </div>
+                        </div>
+
+                        <button class="button button--flex place__button">
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!--==================== SUBSCRIBE ====================-->
+            <section class="subscribe section">
+                <div class="subscribe__bg">
+                    <div class="subscribe__container container">
+                        <h2 class="section__title subscribe__title">Subscribe Our <br> Newsletter</h2>
+                        <p class="subscribe__description">Subscribe to our newsletter and get a 
+                            special 30% discount.
+                        </p>
+    
+                        <form action="" class="subscribe__form">
+                            <input type="text" placeholder="Enter email" class="subscribe__input">
+    
+                            <button class="button">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!--==================== FOOTER ====================-->
+        <footer class="footer section" style="background-color: rgb(17, 17, 17);">
+            <div class="footer__container container grid">
+                <div class="footer__content grid">
+                    <div class="footer__data">
+                        <h3 class="footer__title">Travel</h3>
+                        <p class="footer__description">Travel you choose the <br> destination, 
+                            we offer you the <br> experience.
+                        </p>
+                        <div>
+                            <a href="https://www.facebook.com/" target="_blank" class="footer__social">
+                                <i class="ri-facebook-box-fill"></i>
+                            </a>
+                            <a href="https://twitter.com/" target="_blank" class="footer__social">
+                                <i class="ri-twitter-fill"></i>
+                            </a>
+                            <a href="https://www.instagram.com/" target="_blank" class="footer__social">
+                                <i class="ri-instagram-fill"></i>
+                            </a>
+                            <a href="https://www.youtube.com/" target="_blank" class="footer__social">
+                                <i class="ri-youtube-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+    
+                    <div class="footer__data">
+                        <h3 class="footer__subtitle">About</h3>
+                        <ul>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">About Us</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">Features</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">New & Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div class="footer__data">
+                        <h3 class="footer__subtitle">Company</h3>
+                        <ul>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">Team</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">Plan y Pricing</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">Become a member</a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div class="footer__data">
+                        <h3 class="footer__subtitle">Support</h3>
+                        <ul>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">FAQs</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">Support Center</a>
+                            </li>
+                            <li class="footer__item">
+                                <a href="" class="footer__link">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer__rights">
+                    <p class="footer__copy">&#169; 2021 Bedimcode. All rigths reserved.</p>
+                    <div class="footer__terms">
+                        <a href="#" class="footer__terms-link">Terms & Agreements</a>
+                        <a href="#" class="footer__terms-link">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const video = document.querySelector(".home__img");
+                if (video) {
+                    video.playbackRate = 0.5; // Set slow motion
+                }
+            });
+
+
+
+            // Open modal
+            document.getElementById("openMapModal").addEventListener("click", function () {
+              document.getElementById("mapModal").style.display = "block";
+            });
+          
+            // Close modal
+            document.querySelector(".close").addEventListener("click", function () {
+              document.getElementById("mapModal").style.display = "none";
+            });
+          
+            // Click outside to close
+            window.addEventListener("click", function (e) {
+              const modal = document.getElementById("mapModal");
+              if (e.target === modal) {
+                modal.style.display = "none";
+              }
+            });
+
+            var swiper = new Swiper('.discover__container', {
+                slidesPerView: 3,
+                spaceBetween: 30,
+                centeredSlides: true,
+                loop: true,
+                autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+                }
+            });
+
+            ocument.addEventListener("DOMContentLoaded", function () {
+                const toggleButton = document.querySelector("[data-collapse-toggle]");
+                const menu = document.getElementById("navbar-default");
+
+                toggleButton?.addEventListener("click", function () {
+                menu.classList.toggle("hidden");
+                });
+            });
+          </script>
+          
+          <!--========== SCROLL UP ==========-->
+        <a href="#" class="scrollup" id="scroll-up">
+            <i class="ri-arrow-up-line scrollup__icon"></i>
+        </a>
+        <!--=============== SCROLL REVEAL===============-->
+        <script src="assets/js/scrollreveal.min.js"></script>
+        <script src="assets/js/swiper-bundle.min.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+    </body>
+</html>
